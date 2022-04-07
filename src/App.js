@@ -40,9 +40,12 @@ function App() {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
         console.error(error);
+        setError(error.message);
       });
     event.preventDefault();
   };
@@ -79,10 +82,13 @@ function App() {
               Please provide a valid password.
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Already registered" />
+          </Form.Group>
           <p className="text-danger">{error}</p>
 
           <Button variant="primary" type="submit">
-            Submit
+            Register
           </Button>
         </Form>
       </div>
