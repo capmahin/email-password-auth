@@ -10,6 +10,7 @@ const auth = getAuth(app);
 
 function App() {
   const [validated, setValidated] = useState(false);
+  const [registered, setRegistered] = useState(false);
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +20,10 @@ function App() {
 
   const handlePasswordBlur = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleRegisteredChange = (event) => {
+    setRegistered(event.target.checked);
   };
 
   const handleFromSubmit = (event) => {
@@ -52,7 +57,9 @@ function App() {
   return (
     <div>
       <div className="registration w-50 mx-auto mt-5">
-        <h2 className="text-primary">Please Register!! </h2>
+        <h2 className="text-primary">
+          Please {registered ? "Login" : "Register"}!!
+        </h2>
         <Form noValidate validated={validated} onSubmit={handleFromSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -83,7 +90,11 @@ function App() {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Already registered" />
+            <Form.Check
+              onChange={handleRegisteredChange}
+              type="checkbox"
+              label="Already registered"
+            />
           </Form.Group>
           <p className="text-danger">{error}</p>
 
